@@ -1,7 +1,7 @@
 # Cortex — architecture
 
 How Cortex is put together, and why each part is where it is. Every diagram below describes the
-2.0.0 release.
+2.0 release.
 Each is also rendered as a standalone SVG in [`diagrams/`](diagrams/).
 
 ---

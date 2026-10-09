@@ -9,6 +9,7 @@ pip install "cortex-webhooks @ git+https://github.com/BlueRingsLabs/Cortex_v2.0.
 ```python
 from cortex_webhooks import WebhookVerificationError, verify
 
+
 def receive(request):
     try:
         event = verify(SECRET, request.headers, request.body)  # the raw body, as bytes
