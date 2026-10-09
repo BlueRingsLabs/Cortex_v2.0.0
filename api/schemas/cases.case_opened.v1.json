@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cortex:webhook:cases.case_opened:v1",
+  "title": "cases.case_opened",
+  "description": "A customer case was raised and routed. Rules escalate by priority, category or queue.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "timestamp",
+    "schema_version",
+    "data"
+  ],
+  "properties": {
+    "type": {
+      "const": "cases.case_opened"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the fact was published, in UTC."
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_reference",
+        "category",
+        "channel",
+        "priority",
+        "queue_code",
+        "subject_id"
+      ],
+      "properties": {
+        "case_reference": {
+          "type": "string",
+          "description": "The case's reference, as the case screens and API show it."
+        },
+        "category": {
+          "type": "string",
+          "description": "The tenant's own category code for the case."
+        },
+        "channel": {
+          "type": "string",
+          "description": "How the case came in: phone, email, store, chat..."
+        },
+        "priority": {
+          "type": "string",
+          "description": "The case's priority.",
+          "enum": [
+            "high",
+            "low",
+            "normal",
+            "urgent"
+          ]
+        },
+        "queue_code": {
+          "type": "string",
+          "description": "The code of the queue the case was routed to."
+        },
+        "subject_id": {
+          "type": "string",
+          "description": "The customer the fact concerns. Read them with GET /subjects/{id}.",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        }
+      }
+    }
+  }
+}

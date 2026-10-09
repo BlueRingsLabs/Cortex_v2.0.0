@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cortex:webhook:subjects.subject_created:v1",
+  "title": "subjects.subject_created",
+  "description": "A subject record was opened. Consumers may begin holding data against it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "timestamp",
+    "schema_version",
+    "data"
+  ],
+  "properties": {
+    "type": {
+      "const": "subjects.subject_created"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the fact was published, in UTC."
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "subject_id"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "A person or an organisation.",
+          "enum": [
+            "organisation",
+            "person"
+          ]
+        },
+        "subject_id": {
+          "type": "string",
+          "description": "The customer the fact concerns. Read them with GET /subjects/{id}.",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        }
+      }
+    }
+  }
+}

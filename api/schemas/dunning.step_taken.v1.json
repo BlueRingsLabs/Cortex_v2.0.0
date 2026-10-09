@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cortex:webhook:dunning.step_taken:v1",
+  "title": "dunning.step_taken",
+  "description": "A collections case took a step of its schedule -- a reminder, a warning, a suspension. Once per step: the step's own row is what makes it exactly-once.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "timestamp",
+    "schema_version",
+    "data"
+  ],
+  "properties": {
+    "type": {
+      "const": "dunning.step_taken"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the fact was published, in UTC."
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action",
+        "case_reference",
+        "days_overdue",
+        "step_no",
+        "subject_id"
+      ],
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "What the step did.",
+          "enum": [
+            "refer",
+            "remind",
+            "suspend",
+            "warn",
+            "write_off"
+          ]
+        },
+        "case_reference": {
+          "type": "string",
+          "description": "The collections case's reference."
+        },
+        "days_overdue": {
+          "type": "integer",
+          "description": "How late the debt was when the step ran."
+        },
+        "step_no": {
+          "type": "integer",
+          "description": "Which step of the schedule, from 1."
+        },
+        "subject_id": {
+          "type": "string",
+          "description": "The customer the fact concerns. Read them with GET /subjects/{id}.",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        }
+      }
+    }
+  }
+}

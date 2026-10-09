@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cortex:webhook:identity.principal_created:v1",
+  "title": "identity.principal_created",
+  "description": "A principal now exists. Consumers may provision module-local records for them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "timestamp",
+    "schema_version",
+    "data"
+  ],
+  "properties": {
+    "type": {
+      "const": "identity.principal_created"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the fact was published, in UTC."
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_kind",
+        "principal_id"
+      ],
+      "properties": {
+        "base_kind": {
+          "type": "string",
+          "description": "Which kind of account: staff, leadership, administrator, a customer's own or a machine identity.",
+          "enum": [
+            "administrator",
+            "client",
+            "employee",
+            "manager",
+            "service"
+          ]
+        },
+        "principal_id": {
+          "type": "string",
+          "description": "The new account.",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        }
+      }
+    }
+  }
+}

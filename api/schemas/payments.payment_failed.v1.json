@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cortex:webhook:payments.payment_failed:v1",
+  "title": "payments.payment_failed",
+  "description": "A gateway declined a charge. Not published for an unknown outcome: a charge nobody answered for may have landed. Rules raise a follow-up for collections.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "timestamp",
+    "schema_version",
+    "data"
+  ],
+  "properties": {
+    "type": {
+      "const": "payments.payment_failed"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the fact was published, in UTC."
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "amount_minor",
+        "attempt_key",
+        "currency_code",
+        "failure_code",
+        "invoice_reference",
+        "retryable",
+        "subject_id"
+      ],
+      "properties": {
+        "amount_minor": {
+          "type": "integer",
+          "description": "An amount in minor units of currency_code -- cents, centavos."
+        },
+        "attempt_key": {
+          "type": "string",
+          "description": "The attempt's idempotency key, unique per charge attempt."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "ISO 4217 code of the amount.",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "failure_code": {
+          "type": "string",
+          "description": "Why the gateway declined, as a closed code.",
+          "enum": [
+            "declined",
+            "expired",
+            "insufficient_funds",
+            "invalid_request",
+            "suspected_fraud",
+            "unavailable"
+          ]
+        },
+        "invoice_reference": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The invoice the charge was for; null for a charge against no invoice."
+        },
+        "retryable": {
+          "type": "boolean",
+          "description": "Whether retrying the same method later is sensible."
+        },
+        "subject_id": {
+          "type": "string",
+          "description": "The customer the fact concerns. Read them with GET /subjects/{id}.",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        }
+      }
+    }
+  }
+}

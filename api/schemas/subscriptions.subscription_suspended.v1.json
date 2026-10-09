@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cortex:webhook:subscriptions.subscription_suspended:v1",
+  "title": "subscriptions.subscription_suspended",
+  "description": "A hold was placed on a line -- for credit, fraud, a customer's request or a lost handset. Rules raise a follow-up for retention or collections.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "timestamp",
+    "schema_version",
+    "data"
+  ],
+  "properties": {
+    "type": {
+      "const": "subscriptions.subscription_suspended"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the fact was published, in UTC."
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "barring",
+        "kind",
+        "subject_id",
+        "subscription_reference"
+      ],
+      "properties": {
+        "barring": {
+          "type": "string",
+          "description": "outgoing bars calls and data the customer makes; full bars everything.",
+          "enum": [
+            "full",
+            "outgoing"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "description": "Why: non-payment, the customer's request, fraud, theft or a regulator.",
+          "enum": [
+            "customer_request",
+            "fraud",
+            "non_payment",
+            "regulatory",
+            "theft"
+          ]
+        },
+        "subject_id": {
+          "type": "string",
+          "description": "The customer the fact concerns. Read them with GET /subjects/{id}.",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "subscription_reference": {
+          "type": "string",
+          "description": "The line or service that was barred."
+        }
+      }
+    }
+  }
+}

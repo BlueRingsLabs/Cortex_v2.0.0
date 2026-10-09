@@ -1,0 +1,19 @@
+{
+  "name": "@blueringslabs/cortex-webhooks",
+  "version": "2.0.0",
+  "description": "Verify and read Cortex webhooks: Standard Webhooks signatures and typed events.",
+  "license": "Apache-2.0",
+  "author": "Gonzalo Luis Romero",
+  "type": "module",
+  "engines": { "node": ">=22.18" },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" }
+  },
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node --test test/*.test.ts"
+  }
+}

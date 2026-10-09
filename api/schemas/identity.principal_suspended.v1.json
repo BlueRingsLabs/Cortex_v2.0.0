@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cortex:webhook:identity.principal_suspended:v1",
+  "title": "identity.principal_suspended",
+  "description": "A principal's access was withdrawn. Consumers reassign their work and close sessions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "timestamp",
+    "schema_version",
+    "data"
+  ],
+  "properties": {
+    "type": {
+      "const": "identity.principal_suspended"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the fact was published, in UTC."
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "principal_id",
+        "reason"
+      ],
+      "properties": {
+        "principal_id": {
+          "type": "string",
+          "description": "The account whose access was withdrawn.",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "reason": {
+          "type": "string",
+          "description": "A machine code, status_changed_to_<status>. Never free text."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cortex:webhook:webhook.ping:v1",
+  "title": "webhook.ping",
+  "description": "Sent from the integrations screen to check a receiver end to end.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "timestamp",
+    "schema_version",
+    "data"
+  ],
+  "properties": {
+    "type": {
+      "const": "webhook.ping"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "endpoint_reference"
+      ],
+      "properties": {
+        "endpoint_reference": {
+          "type": "string",
+          "description": "The reference of the endpoint the ping was sent to."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cortex:webhook:subjects.subject_reclassified:v1",
+  "title": "subjects.subject_reclassified",
+  "description": "A subject's data classification changed. Consumers re-evaluate their handling rules.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "timestamp",
+    "schema_version",
+    "data"
+  ],
+  "properties": {
+    "type": {
+      "const": "subjects.subject_reclassified"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the fact was published, in UTC."
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "classification",
+        "subject_id"
+      ],
+      "properties": {
+        "classification": {
+          "type": "string",
+          "description": "The sensitivity the customer's record is now handled at.",
+          "enum": [
+            "confidential",
+            "internal",
+            "public",
+            "restricted"
+          ]
+        },
+        "subject_id": {
+          "type": "string",
+          "description": "The customer the fact concerns. Read them with GET /subjects/{id}.",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        }
+      }
+    }
+  }
+}

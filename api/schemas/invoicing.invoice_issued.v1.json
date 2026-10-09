@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cortex:webhook:invoicing.invoice_issued:v1",
+  "title": "invoicing.invoice_issued",
+  "description": "A customer's document for a cycle was numbered and sealed -- an invoice, or a statement when an offer took the whole bill. Rules watch large bills and warn before a charge.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "timestamp",
+    "schema_version",
+    "data"
+  ],
+  "properties": {
+    "type": {
+      "const": "invoicing.invoice_issued"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the fact was published, in UTC."
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "currency_code",
+        "cycle_reference",
+        "due_on",
+        "invoice_reference",
+        "kind",
+        "subject_id",
+        "total_minor"
+      ],
+      "properties": {
+        "currency_code": {
+          "type": "string",
+          "description": "ISO 4217 code of the amount.",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "cycle_reference": {
+          "type": "string",
+          "description": "The billing cycle the document closes."
+        },
+        "due_on": {
+          "type": "string",
+          "description": "When payment is due.",
+          "format": "date"
+        },
+        "invoice_reference": {
+          "type": "string",
+          "description": "The document's number: fiscal for an invoice or a credit note, from the statements' own series for a statement."
+        },
+        "kind": {
+          "type": "string",
+          "description": "An invoice, a credit note, or a statement that demands nothing.",
+          "enum": [
+            "credit_note",
+            "invoice",
+            "statement"
+          ]
+        },
+        "subject_id": {
+          "type": "string",
+          "description": "The customer the fact concerns. Read them with GET /subjects/{id}.",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "total_minor": {
+          "type": "integer",
+          "description": "An amount in minor units of currency_code -- cents, centavos."
+        }
+      }
+    }
+  }
+}

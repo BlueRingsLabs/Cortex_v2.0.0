@@ -1,0 +1,59 @@
+# The SDKs against the deliveries the platform signed, and the examples against real HTTP.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        python: ["3.10", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: The SDK against the signed vectors
+        run: python -m unittest discover -s sdk/python/tests -t sdk/python -v
+      - name: The receiver over HTTP
+        run: python examples/smoke.py python
+
+  typescript:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.18"
+      - name: The SDK against the signed vectors
+        run: node --test sdk/typescript/test/*.test.ts
+      - name: The committed build is the build of the committed source
+        working-directory: sdk/typescript
+        run: |
+          npm install --no-save --no-package-lock typescript@5.9.3 @types/node@22
+          npx tsc -p tsconfig.json
+          git diff --exit-code -- dist
+      - name: The receiver over HTTP
+        run: python3 examples/smoke.py node
+
+  go:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+      - name: The SDK against the signed vectors
+        working-directory: sdk/go
+        run: |
+          go vet ./...
+          go test ./...
+      - name: The receiver over HTTP
+        run: python3 examples/smoke.py go

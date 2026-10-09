@@ -1,0 +1,9 @@
+Cortex 2.0 — public SDKs, integration examples and interface specifications
+Copyright 2026 Gonzalo Luis Romero
+
+The contents of this repository are licensed under the Apache License, Version 2.0 (see
+LICENSE): the webhook SDKs in sdk/, the examples in examples/, the API specification and
+webhook reference in api/, and the documents in docs/.
+
+The Cortex platform itself is proprietary software, licensed separately to the operators who
+run it, and is not part of this repository. Nothing here grants any right to it.

@@ -1,0 +1,6 @@
+node_modules/
+__pycache__/
+*.pyc
+/examples/go/receiver
+# The release tool that assembles api/, sdk/ and the diagrams from the platform's tree.
+/.build/
