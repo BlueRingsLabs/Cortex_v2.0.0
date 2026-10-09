@@ -12,10 +12,12 @@ HTTP, the way a real delivery reaches it.
 from __future__ import annotations
 
 import base64
+import contextlib
 import hashlib
 import hmac
 import json
 import os
+import signal
 import socket
 import subprocess
 import sys
@@ -69,6 +71,8 @@ def wait_for(port: int, deadline: float) -> None:
 
 def main(language: str) -> int:
     command, cwd, port = RECEIVERS[language]
+    # Its own process group: `go run` compiles and then starts the receiver as a child, and
+    # ending only the parent would leave the child holding the output this reads.
     receiver = subprocess.Popen(
         command,
         cwd=cwd,
@@ -76,6 +80,7 @@ def main(language: str) -> int:
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         text=True,
+        start_new_session=True,
     )
     failures: list[str] = []
     try:
@@ -109,7 +114,8 @@ def main(language: str) -> int:
             if status != expected:
                 failures.append(name)
     finally:
-        receiver.terminate()
+        with contextlib.suppress(ProcessLookupError):
+            os.killpg(receiver.pid, signal.SIGTERM)
         output, _ = receiver.communicate(timeout=30)
 
     lines = [line for line in output.splitlines() if line.strip()]
