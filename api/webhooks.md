@@ -1,6 +1,6 @@
 # Cortex webhooks — the reference
 
-<!-- Generated from the Cortex platform's own code at release 2.0.1. Do not edit. -->
+<!-- Generated from the Cortex platform's own code at release 2.0.2. Do not edit. -->
 
 Cortex sends a tenant's facts to the systems it runs — an ERP, a data warehouse, a network
 provisioning system, a contact-centre platform — as they happen: an invoice issued, a payment
