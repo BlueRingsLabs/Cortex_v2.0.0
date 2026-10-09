@@ -4,3 +4,5 @@ __pycache__/
 /examples/go/receiver
 # The release tool that assembles api/, sdk/ and the diagrams from the platform's tree.
 /.build/
+sdk/python/build/
+sdk/python/*.egg-info/

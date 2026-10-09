@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "cortex-webhooks"
 version = "2.0.0"
 description = "Verify and read Cortex webhooks: Standard Webhooks signatures and typed events."
-readme = "../README.md"
+readme = "README.md"
 license = "Apache-2.0"
 authors = [{ name = "Gonzalo Luis Romero" }]
 requires-python = ">=3.10"

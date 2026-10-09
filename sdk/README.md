@@ -32,7 +32,8 @@ def receive(request):
 ## TypeScript (Node 22.18+)
 
 ```bash
-npm install "github:BlueRingsLabs/Cortex_v2.0.0#path:sdk/typescript"
+git clone --depth 1 https://github.com/BlueRingsLabs/Cortex_v2.0.0
+npm install ./Cortex_v2.0.0/sdk/typescript   # the published copy carries its built dist/
 ```
 
 ```ts
