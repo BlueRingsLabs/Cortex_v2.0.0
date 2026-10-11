@@ -16,6 +16,8 @@ const (
 	EventSubjectsSubjectErased              = "subjects.subject_erased"
 	EventSubjectsSubjectReclassified        = "subjects.subject_reclassified"
 	EventSubscriptionsSubscriptionSuspended = "subscriptions.subscription_suspended"
+	EventTenancyKeysResealed                = "tenancy.keys_resealed"
+	EventTenancyResealRequested             = "tenancy.reseal_requested"
 	EventWebhookPing                        = "webhook.ping"
 )
 
@@ -33,6 +35,8 @@ var EventTypes = []string{
 	EventSubjectsSubjectErased,
 	EventSubjectsSubjectReclassified,
 	EventSubscriptionsSubscriptionSuspended,
+	EventTenancyKeysResealed,
+	EventTenancyResealRequested,
 	EventWebhookPing,
 }
 
@@ -178,6 +182,28 @@ type SubscriptionsSubscriptionSuspendedData struct {
 	SubjectID string `json:"subject_id"`
 	// The line or service that was barred.
 	SubscriptionReference string `json:"subscription_reference"`
+}
+
+// TenancyKeysResealedData is the data of tenancy.keys_resealed: A re-seal finished: completed with nothing left under a superseded generation, or failed with how many values it could not reach.
+type TenancyKeysResealedData struct {
+	// The re-seal job.
+	JobID string `json:"job_id"`
+	// Whether it finished. One of: completed, failed.
+	Outcome string `json:"outcome"`
+	// How many are still under a superseded generation: 0 unless failed.
+	Remaining int64 `json:"remaining"`
+	// How many values were sealed again.
+	Resealed int64 `json:"resealed"`
+	// The generation the values were sealed under.
+	TargetGeneration int64 `json:"target_generation"`
+}
+
+// TenancyResealRequestedData is the data of tenancy.reseal_requested: A tenant's encrypted fields are to be sealed again under the current key generation. The worker takes the job; a security team's SIEM may want to know it was asked for.
+type TenancyResealRequestedData struct {
+	// The re-seal job, as the encryption keys screen shows it.
+	JobID string `json:"job_id"`
+	// The key generation every value is to be sealed under.
+	TargetGeneration int64 `json:"target_generation"`
 }
 
 // WebhookPingData is the data of webhook.ping, sent to check a receiver end to end.

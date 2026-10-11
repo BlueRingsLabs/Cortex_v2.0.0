@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cortex:webhook:tenancy.keys_resealed:v1",
+  "title": "tenancy.keys_resealed",
+  "description": "A re-seal finished: completed with nothing left under a superseded generation, or failed with how many values it could not reach.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "timestamp",
+    "schema_version",
+    "data"
+  ],
+  "properties": {
+    "type": {
+      "const": "tenancy.keys_resealed"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the fact was published, in UTC."
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "job_id",
+        "outcome",
+        "remaining",
+        "resealed",
+        "target_generation"
+      ],
+      "properties": {
+        "job_id": {
+          "type": "string",
+          "description": "The re-seal job.",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "outcome": {
+          "type": "string",
+          "description": "Whether it finished.",
+          "enum": [
+            "completed",
+            "failed"
+          ]
+        },
+        "remaining": {
+          "type": "integer",
+          "description": "How many are still under a superseded generation: 0 unless failed."
+        },
+        "resealed": {
+          "type": "integer",
+          "description": "How many values were sealed again."
+        },
+        "target_generation": {
+          "type": "integer",
+          "description": "The generation the values were sealed under."
+        }
+      }
+    }
+  }
+}

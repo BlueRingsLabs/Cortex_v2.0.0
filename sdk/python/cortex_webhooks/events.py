@@ -273,6 +273,48 @@ class SubscriptionsSubscriptionSuspended(TypedDict):
     data: SubscriptionsSubscriptionSuspendedData
 
 
+class TenancyKeysResealedData(TypedDict):
+    """A re-seal finished: completed with nothing left under a superseded generation, or failed
+    with how many values it could not reach.
+    """
+
+    #: The re-seal job.
+    job_id: str
+    #: Whether it finished.
+    outcome: Literal["completed", "failed"]
+    #: How many are still under a superseded generation: 0 unless failed.
+    remaining: int
+    #: How many values were sealed again.
+    resealed: int
+    #: The generation the values were sealed under.
+    target_generation: int
+
+
+class TenancyKeysResealed(TypedDict):
+    type: Literal["tenancy.keys_resealed"]
+    timestamp: str
+    schema_version: Literal[1]
+    data: TenancyKeysResealedData
+
+
+class TenancyResealRequestedData(TypedDict):
+    """A tenant's encrypted fields are to be sealed again under the current key generation. The
+    worker takes the job; a security team's SIEM may want to know it was asked for.
+    """
+
+    #: The re-seal job, as the encryption keys screen shows it.
+    job_id: str
+    #: The key generation every value is to be sealed under.
+    target_generation: int
+
+
+class TenancyResealRequested(TypedDict):
+    type: Literal["tenancy.reseal_requested"]
+    timestamp: str
+    schema_version: Literal[1]
+    data: TenancyResealRequestedData
+
+
 class WebhookPingData(TypedDict):
     endpoint_reference: str
 
@@ -299,6 +341,8 @@ Event = (
     | SubjectsSubjectErased
     | SubjectsSubjectReclassified
     | SubscriptionsSubscriptionSuspended
+    | TenancyKeysResealed
+    | TenancyResealRequested
     | WebhookPing
 )
 
@@ -317,6 +361,8 @@ EVENT_TYPES: Final = frozenset(
         "subjects.subject_erased",
         "subjects.subject_reclassified",
         "subscriptions.subscription_suspended",
+        "tenancy.keys_resealed",
+        "tenancy.reseal_requested",
         "webhook.ping",
     }
 )

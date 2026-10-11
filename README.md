@@ -11,7 +11,8 @@ inside your own network, under your own keys.
 [![Licence: Apache-2.0 (this repository)](https://img.shields.io/badge/licence-Apache--2.0-blue.svg)](LICENSE)
 
 [Architecture](docs/architecture.md) · [Benchmarks](docs/benchmarks.md) ·
-[Security model](docs/security-model.md) · [Integrating](docs/integrating.md) ·
+[**Live demonstration**](#evaluating-the-live-demonstration) · [Security model](docs/security-model.md) ·
+[Integrating](docs/integrating.md) ·
 [API](api/openapi.json) · [Webhooks](api/webhooks.md) · [SDKs](sdk/) · [Examples](examples/)
 
 </div>
@@ -143,6 +144,61 @@ def receive(request):
 
 Then read [`docs/integrating.md`](docs/integrating.md) for the API: sessions bound to a key,
 the error envelope and its ten categories, and the correlation id every response carries.
+
+## Evaluating the live demonstration
+
+[**cortex.gonzaloromeroai.com**](https://cortex.gonzaloromeroai.com) runs the released Cortex
+on one 4-vCPU virtual machine, exactly as a licensee installs it, with three telecom operators
+of very different sizes on it. It is open to evaluators, architects and executives without
+asking: sign in with the account below.
+
+| | |
+| --- | --- |
+| Organisation | `carrier-large` (about 900,000 customers) |
+| Username | `evaluator` |
+| Password | `ioNcS5eZThg7tZioBRJE` |
+| Authenticator (TOTP secret, for step-up) | `3GNRTGGRVERW4DQTJB44FAGHFGASLYRI` |
+
+Add the secret to any authenticator app (or `oathtool --totp -b <secret>`) when a screen asks
+for a second factor. The account is an administrator of that organisation with six things
+withheld — managing people, roles and others' credentials, impersonation, and the key re-seal —
+because those are the ones one evaluator could use against the next. Its sign-in is managed by
+the host, so it cannot be changed or locked from inside. **Everything is restored nightly** to
+the same state, so change anything you like.
+
+### What to verify
+
+1. **The console (SPA).** *Customers* searches the 900,000 in milliseconds and opens one with
+   its lines, balance and open cases. *Prepaid balances* and *Fiscal* show the telecom core; *Audit* shows
+   every change you just made, hash-chained; *Encryption keys* counts which key generation
+   seals each kind of personal data, without showing any of it.
+2. **The API.** Everything the console does goes through the documented API
+   ([`api/openapi.json`](api/openapi.json)). Sign-in returns a session bound to a key you hold
+   (DPoP), so a stolen token alone is useless — [`docs/integrating.md`](docs/integrating.md)
+   walks through it in curl, and every response carries a correlation id that finds its log
+   line and its audit record.
+3. **Webhook delivery.** *Integrations* → add an endpoint at a receiver of yours (any public
+   HTTPS URL; private and link-local addresses are refused), choose the facts, and keep the
+   signing secret shown once. *Send a test ping* delivers a signed event; the endpoint's deliveries
+   show every attempt with its status and timing, and a dead one can be replayed with a reason. Verify it with
+   the SDK above, or run `python examples/smoke.py python` locally first.
+4. **Speed.** Every read the console makes answers with p95 under 100 ms on this host; the
+   methodology is in [`docs/benchmarks.md`](docs/benchmarks.md).
+
+### Onboarding an organisation of your own
+
+On an installation, the host's operator creates a tenant with one command — the organisation,
+its currency, time zone and language, and its first administrator, who receives a one-time
+password and must replace it at first sign-in:
+
+```bash
+sudo cortexctl tenant create --slug acme --name "Acme Telecom" --administrator first.admin \
+  --email first.admin@acme.example --currency ARS --timezone America/Argentina/Buenos_Aires
+```
+
+From there, *Vertical presets* applies a mobile, cable-and-fibre or contact-centre starting
+configuration, and everything else is done in the console or through the API. The demonstration
+does not create tenants for the public; the command is what a licensee runs.
 
 ## Deploying Cortex
 

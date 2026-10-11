@@ -67,9 +67,12 @@ fails when one stops holding.
 
 ## The network
 
-* **Egress is an allow-list**, enforced twice: by the application — resolving the name, refusing
-  private ranges and the metadata service, and pinning the address it checked — and by a
-  default-deny network policy, which still holds when the process has been subverted.
+* **Egress is an allow-list**, enforced twice: by a default-deny network policy, which still
+  holds when the process has been subverted, and by the application for every destination
+  somebody *types* — a webhook receiver, an AI provider's endpoint — resolving the name,
+  refusing private ranges and the metadata service, and pinning the address it checked. The
+  fixed endpoints of payment gateways and tax authorities are named in their adapters' code, not
+  typed by anyone, and are called with TLS verified against that name.
 * **The deployment's controls are literals**: non-root, read-only root filesystem, every Linux
   capability dropped, no service-account token, the restricted Pod Security Standard. A value an
   operator can override on a command line is a default, not a control.

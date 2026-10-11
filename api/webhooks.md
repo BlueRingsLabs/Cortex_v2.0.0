@@ -1,6 +1,6 @@
 # Cortex webhooks — the reference
 
-<!-- Generated from the Cortex platform's own code at release 2.0.3. Do not edit. -->
+<!-- Generated from the Cortex platform's own code at release 2.1.2. Do not edit. -->
 
 Cortex sends a tenant's facts to the systems it runs — an ERP, a data warehouse, a network
 provisioning system, a contact-centre platform — as they happen: an invoice issued, a payment
@@ -304,3 +304,28 @@ A hold was placed on a line -- for credit, fraud, a customer's request or a lost
 | `subscription_reference` | string | The line or service that was barred. |  |
 
 Schema: [`schemas/subscriptions.subscription_suspended.v1.json`](schemas/subscriptions.subscription_suspended.v1.json)
+
+### `tenancy.keys_resealed` (v1)
+
+A re-seal finished: completed with nothing left under a superseded generation, or failed with how many values it could not reach.
+
+| Field | Type | Meaning | Values |
+|---|---|---|---|
+| `job_id` | string (ulid) | The re-seal job. |  |
+| `outcome` | string | Whether it finished. | `completed`, `failed` |
+| `remaining` | integer | How many are still under a superseded generation: 0 unless failed. |  |
+| `resealed` | integer | How many values were sealed again. |  |
+| `target_generation` | integer | The generation the values were sealed under. |  |
+
+Schema: [`schemas/tenancy.keys_resealed.v1.json`](schemas/tenancy.keys_resealed.v1.json)
+
+### `tenancy.reseal_requested` (v1)
+
+A tenant's encrypted fields are to be sealed again under the current key generation. The worker takes the job; a security team's SIEM may want to know it was asked for.
+
+| Field | Type | Meaning | Values |
+|---|---|---|---|
+| `job_id` | string (ulid) | The re-seal job, as the encryption keys screen shows it. |  |
+| `target_generation` | integer | The key generation every value is to be sealed under. |  |
+
+Schema: [`schemas/tenancy.reseal_requested.v1.json`](schemas/tenancy.reseal_requested.v1.json)
