@@ -203,6 +203,38 @@ export interface SubscriptionsSubscriptionSuspended {
     readonly schema_version: 1;
     readonly data: SubscriptionsSubscriptionSuspendedData;
 }
+/** A re-seal finished: completed with nothing left under a superseded generation, or failed with how many values it could not reach. */
+export interface TenancyKeysResealedData {
+    /** The re-seal job. */
+    readonly job_id: string;
+    /** Whether it finished. */
+    readonly outcome: "completed" | "failed";
+    /** How many are still under a superseded generation: 0 unless failed. */
+    readonly remaining: number;
+    /** How many values were sealed again. */
+    readonly resealed: number;
+    /** The generation the values were sealed under. */
+    readonly target_generation: number;
+}
+export interface TenancyKeysResealed {
+    readonly type: "tenancy.keys_resealed";
+    readonly timestamp: string;
+    readonly schema_version: 1;
+    readonly data: TenancyKeysResealedData;
+}
+/** A tenant's encrypted fields are to be sealed again under the current key generation. The worker takes the job; a security team's SIEM may want to know it was asked for. */
+export interface TenancyResealRequestedData {
+    /** The re-seal job, as the encryption keys screen shows it. */
+    readonly job_id: string;
+    /** The key generation every value is to be sealed under. */
+    readonly target_generation: number;
+}
+export interface TenancyResealRequested {
+    readonly type: "tenancy.reseal_requested";
+    readonly timestamp: string;
+    readonly schema_version: 1;
+    readonly data: TenancyResealRequestedData;
+}
 /** Sent from the integrations screen to check a receiver end to end. */
 export interface WebhookPing {
     readonly type: "webhook.ping";
@@ -212,6 +244,6 @@ export interface WebhookPing {
         readonly endpoint_reference: string;
     };
 }
-export type CortexEvent = ActivationPortExecuted | CasesCaseOpened | CasesCaseSlaBreached | DunningStepTaken | IdentityPrincipalCreated | IdentityPrincipalSuspended | InvoicingInvoiceIssued | PaymentsPaymentFailed | SubjectsSubjectCreated | SubjectsSubjectErased | SubjectsSubjectReclassified | SubscriptionsSubscriptionSuspended | WebhookPing;
+export type CortexEvent = ActivationPortExecuted | CasesCaseOpened | CasesCaseSlaBreached | DunningStepTaken | IdentityPrincipalCreated | IdentityPrincipalSuspended | InvoicingInvoiceIssued | PaymentsPaymentFailed | SubjectsSubjectCreated | SubjectsSubjectErased | SubjectsSubjectReclassified | SubscriptionsSubscriptionSuspended | TenancyKeysResealed | TenancyResealRequested | WebhookPing;
 /** Every type a receiver can be sent. */
-export declare const EVENT_TYPES: readonly ["activation.port_executed", "cases.case_opened", "cases.case_sla_breached", "dunning.step_taken", "identity.principal_created", "identity.principal_suspended", "invoicing.invoice_issued", "payments.payment_failed", "subjects.subject_created", "subjects.subject_erased", "subjects.subject_reclassified", "subscriptions.subscription_suspended", "webhook.ping"];
+export declare const EVENT_TYPES: readonly ["activation.port_executed", "cases.case_opened", "cases.case_sla_breached", "dunning.step_taken", "identity.principal_created", "identity.principal_suspended", "invoicing.invoice_issued", "payments.payment_failed", "subjects.subject_created", "subjects.subject_erased", "subjects.subject_reclassified", "subscriptions.subscription_suspended", "tenancy.keys_resealed", "tenancy.reseal_requested", "webhook.ping"];

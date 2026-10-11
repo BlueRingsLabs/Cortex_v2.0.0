@@ -13,5 +13,7 @@ export const EVENT_TYPES = [
     "subjects.subject_erased",
     "subjects.subject_reclassified",
     "subscriptions.subscription_suspended",
+    "tenancy.keys_resealed",
+    "tenancy.reseal_requested",
     "webhook.ping",
 ];
