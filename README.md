@@ -152,19 +152,31 @@ on one 4-vCPU virtual machine, exactly as a licensee installs it, with three tel
 of very different sizes on it. It is open to evaluators, architects and executives without
 asking: sign in with the account below.
 
-| | |
-| --- | --- |
-| Organisation | `carrier-large` (about 900,000 customers) |
-| Username | `evaluator` |
-| Password | `ioNcS5eZThg7tZioBRJE` |
-| Authenticator (TOTP secret, for step-up) | `3GNRTGGRVERW4DQTJB44FAGHFGASLYRI` |
+Organisation for both accounts: **`carrier-large`** (about 900,000 customers).
 
-Add the secret to any authenticator app (or `oathtool --totp -b <secret>`) when a screen asks
-for a second factor. The account is an administrator of that organisation with six things
-withheld — managing people, roles and others' credentials, impersonation, and the key re-seal —
-because those are the ones one evaluator could use against the next. Its sign-in is managed by
-the host, so it cannot be changed or locked from inside. **Everything is restored nightly** to
-the same state, so change anything you like.
+| Account | Username | Password | Authenticator (TOTP secret, for step-up) |
+| --- | --- | --- | --- |
+| **Evaluator** — an administrator, six things withheld | `evaluator` | `ioNcS5eZThg7tZioBRJE` | `3GNRTGGRVERW4DQTJB44FAGHFGASLYRI` |
+| **Care agent** — an employee, to watch the ACL from its side | `agent` | `mLzaSJfc6361OqNxkmRd` | — |
+
+When a screen asks for a second factor, add the secret to any authenticator app, or run
+`python examples/evaluate/totp.py` — it prints the current code with nothing installed.
+
+The **evaluator** is an administrator of that organisation with six things withheld — managing
+people, roles and others' credentials, impersonation, and the key re-seal — because those are
+the ones one evaluator could use against the next. The **care agent** is an employee: it reads
+the care handbook, labelled for staff, and nothing else until somebody grants it more — which
+is how the access rules are watched working. Both sign-ins are managed by the host, so neither
+can be changed or locked from inside. **Everything is restored nightly** to the same state, so
+change anything you like.
+
+**Start with the [evaluation runbook](docs/evaluation-runbook.md)**: every journey, step by
+step, with the exact values to enter and the screens you should see. `python
+examples/evaluate/journey.py` runs every one of them against the live demonstration over the
+API and prints what held. The runbook is also in [Spanish](docs/evaluation-runbook.es.md) and
+[Portuguese](docs/evaluation-runbook.pt.md), and a quick guide for an organisation's staff, one
+task to a page, is in [English](docs/cortex-basic-guide.pdf),
+[Spanish](docs/guia-basica-cortex.pdf) and [Portuguese](docs/guia-basico-cortex.pdf).
 
 ### What to verify
 

@@ -1,0 +1,128 @@
+[
+  {
+    "file": "01-sign-in.jpg",
+    "key": "sign-in",
+    "title": "Entrar no Cortex",
+    "caption": "Organização, usuário e senha, e depois Sign in.",
+    "missing_marks": []
+  },
+  {
+    "file": "02-workspace.jpg",
+    "key": "workspace",
+    "title": "Área de trabalho",
+    "caption": "Cada tela que a conta pode usar, agrupada por área. O que ela não pode usar não aparece.",
+    "missing_marks": []
+  },
+  {
+    "file": "03-step-up.jpg",
+    "key": "step-up",
+    "title": "Verificação adicional (segundo fator)",
+    "caption": "Algumas ações pedem um código de 6 dígitos: do aplicativo autenticador ou de examples/evaluate/totp.py.",
+    "missing_marks": []
+  },
+  {
+    "file": "04-subjects.jpg",
+    "key": "subjects",
+    "title": "Pessoas e organizações (Subjects)",
+    "caption": "Referência, unidade organizacional, classificação e etiquetas de cada pessoa ou organização.",
+    "missing_marks": []
+  },
+  {
+    "file": "05-subject-panel.jpg",
+    "key": "subject-panel",
+    "title": "Ficha de uma pessoa",
+    "caption": "O registro e as ações permitidas sobre ele, decididas pelo servidor para esta linha.",
+    "missing_marks": []
+  },
+  {
+    "file": "06-customers.jpg",
+    "key": "customers",
+    "title": "Clientes: visão 360°",
+    "caption": "Digitar o início do nome (Subject 000): linhas, saldo e casos abertos numa só linha.",
+    "missing_marks": []
+  },
+  {
+    "file": "07-knowledge.jpg",
+    "key": "knowledge",
+    "title": "Conhecimento: coleções de documentos",
+    "caption": "O que o assistente pode consultar. A sensibilidade decide o que pode sair para um modelo externo.",
+    "missing_marks": []
+  },
+  {
+    "file": "08-agent-before.jpg",
+    "key": "agent-before",
+    "title": "O atendente, antes da permissão",
+    "caption": "Como atendente: a resposta vem só do manual de atendimento, a única coleção liberada para a equipe.",
+    "missing_marks": []
+  },
+  {
+    "file": "09-grant.jpg",
+    "key": "grant",
+    "title": "Conceder acesso a uma coleção",
+    "caption": "Coleção, pessoa e permissão pelo nome; uma referência e o motivo, que fica registrado.",
+    "missing_marks": []
+  },
+  {
+    "file": "10-who-may-reach-it.jpg",
+    "key": "who-may-reach-it",
+    "title": "Quem pode acessar",
+    "caption": "A permissão fica visível na coleção e vale até ser revogada.",
+    "missing_marks": []
+  },
+  {
+    "file": "11-agent-after.jpg",
+    "key": "agent-after",
+    "title": "O atendente, com a permissão",
+    "caption": "A mesma pergunta: agora a resposta vem dos procedimentos de operações de rede.",
+    "missing_marks": []
+  },
+  {
+    "file": "12-assistant.jpg",
+    "key": "assistant",
+    "title": "Consultar o Assistente",
+    "caption": "Trechos ordenados, cada um com seu documento, revisão, coleção e sensibilidade.",
+    "missing_marks": []
+  },
+  {
+    "file": "13-provider.jpg",
+    "key": "provider",
+    "title": "Configurar um provedor de IA",
+    "caption": "Qualquer endpoint compatível com OpenAI (URL completa). A chave é cifrada e não volta a ser exibida.",
+    "missing_marks": []
+  },
+  {
+    "file": "14-keys.jpg",
+    "key": "keys",
+    "title": "Chaves de criptografia",
+    "caption": "Qual geração de chave protege cada tipo de dado pessoal, sem abrir nenhum dado.",
+    "missing_marks": []
+  },
+  {
+    "file": "15-integrations.jpg",
+    "key": "integrations",
+    "title": "Integrações (webhooks)",
+    "caption": "Registrar um endpoint, escolher os eventos, enviar um teste e ver cada tentativa.",
+    "missing_marks": []
+  },
+  {
+    "file": "16-audit.jpg",
+    "key": "audit",
+    "title": "Registro de auditoria",
+    "caption": "Cada alteração fica encadeada; a permissão recém-concedida aparece primeiro.",
+    "missing_marks": []
+  },
+  {
+    "file": "17-revoke.jpg",
+    "key": "revoke",
+    "title": "Revogar um acesso",
+    "caption": "A permissão termina na hora e fica registrada junto com a sua revogação.",
+    "missing_marks": []
+  },
+  {
+    "file": "18-sessions.jpg",
+    "key": "sessions",
+    "title": "Minhas sessões e senha",
+    "caption": "Onde a conta está aberta. Nas contas publicadas, a senha é administrada pela instalação.",
+    "missing_marks": []
+  }
+]

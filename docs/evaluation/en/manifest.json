@@ -1,0 +1,128 @@
+[
+  {
+    "file": "01-sign-in.jpg",
+    "key": "sign-in",
+    "title": "Signing in",
+    "caption": "Organisation, username and password, then Sign in.",
+    "missing_marks": []
+  },
+  {
+    "file": "02-workspace.jpg",
+    "key": "workspace",
+    "title": "The workspace",
+    "caption": "Every screen this account may use, grouped by area. What it may not use is not shown at all.",
+    "missing_marks": []
+  },
+  {
+    "file": "03-step-up.jpg",
+    "key": "step-up",
+    "title": "A second factor, when an action asks for one",
+    "caption": "Some actions ask for a six-digit code: from an authenticator app, or python examples/evaluate/totp.py.",
+    "missing_marks": []
+  },
+  {
+    "file": "04-subjects.jpg",
+    "key": "subjects",
+    "title": "Subjects: everyone the tenant holds",
+    "caption": "Reference, org unit, classification and labels, for every person and organisation.",
+    "missing_marks": []
+  },
+  {
+    "file": "05-subject-panel.jpg",
+    "key": "subject-panel",
+    "title": "One subject, opened",
+    "caption": "The record and the actions this account may take on it, decided by the server for this row.",
+    "missing_marks": []
+  },
+  {
+    "file": "06-customers.jpg",
+    "key": "customers",
+    "title": "Customers: the 360° overview",
+    "caption": "Type the start of a name (Subject 000): lines, balance and open cases on one row.",
+    "missing_marks": []
+  },
+  {
+    "file": "07-knowledge.jpg",
+    "key": "knowledge",
+    "title": "Knowledge: collections of documents",
+    "caption": "What the assistant may consult. Sensitivity decides what may ever reach an outside model.",
+    "missing_marks": []
+  },
+  {
+    "file": "08-agent-before.jpg",
+    "key": "agent-before",
+    "title": "The agent, before a grant",
+    "caption": "Signed in as the care agent: the answer comes only from the handbook labelled for staff.",
+    "missing_marks": []
+  },
+  {
+    "file": "09-grant.jpg",
+    "key": "grant",
+    "title": "Granting one person one collection",
+    "caption": "Collection, person and capability by name; a reference and a reason, which the audit keeps.",
+    "missing_marks": []
+  },
+  {
+    "file": "10-who-may-reach-it.jpg",
+    "key": "who-may-reach-it",
+    "title": "Who may reach it",
+    "caption": "The grant is listed on the collection and holds until revoked.",
+    "missing_marks": []
+  },
+  {
+    "file": "11-agent-after.jpg",
+    "key": "agent-after",
+    "title": "The agent, after the grant",
+    "caption": "The same question: the answer now comes from the network operations runbooks.",
+    "missing_marks": []
+  },
+  {
+    "file": "12-assistant.jpg",
+    "key": "assistant",
+    "title": "Asking the assistant",
+    "caption": "Passages ranked, each with its document, revision, collection and sensitivity.",
+    "missing_marks": []
+  },
+  {
+    "file": "13-provider.jpg",
+    "key": "provider",
+    "title": "Configuring an AI provider",
+    "caption": "Any OpenAI-compatible endpoint, by its full URL. The key is sealed and never shown again.",
+    "missing_marks": []
+  },
+  {
+    "file": "14-keys.jpg",
+    "key": "keys",
+    "title": "Encryption keys",
+    "caption": "Which key generation seals each kind of personal data, counted without opening any.",
+    "missing_marks": []
+  },
+  {
+    "file": "15-integrations.jpg",
+    "key": "integrations",
+    "title": "Integrations (webhooks)",
+    "caption": "Register an endpoint, choose the facts, send a test ping, and see every attempt.",
+    "missing_marks": []
+  },
+  {
+    "file": "16-audit.jpg",
+    "key": "audit",
+    "title": "The audit trail",
+    "caption": "Every change, hash-chained; the grant just made is at the top.",
+    "missing_marks": []
+  },
+  {
+    "file": "17-revoke.jpg",
+    "key": "revoke",
+    "title": "Revoking access",
+    "caption": "The grant ends at once and stays on the record beside its revocation.",
+    "missing_marks": []
+  },
+  {
+    "file": "18-sessions.jpg",
+    "key": "sessions",
+    "title": "Your sessions and password",
+    "caption": "Where this account is signed in. On the published accounts, the installation manages the password.",
+    "missing_marks": []
+  }
+]
